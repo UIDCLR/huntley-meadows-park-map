@@ -1,0 +1,4 @@
+
+# Notes
+
+- Initialized repository
