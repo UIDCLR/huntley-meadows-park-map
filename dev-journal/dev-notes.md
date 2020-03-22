@@ -7,6 +7,22 @@
 
 - [User Authentication with the MEAN Stack](https://www.sitepoint.com/user-authentication-mean-stack/)
 
+# Continued Development
+
+- `heroku local` Starts the app locally using the app's Node Express server
+  - Useful for back-end testing / must use if there is no mockdata
+  - port 4200 is default: http://localhost:4200
+- `ng serve` Starts front-end of the app locally using Angular
+  - Useful for front-end testing
+  - port 4200 is default: http://localhost:4200
+
+# Initialization
+
+- `ng new huntley-meadows-park-map` Creates a new Angular app
+- Added index.js & server/server.js for the express server
+  - Gets used by heroku local to run the app using a Node Express server
+- `npm i` Install packages/dependencies
+
 # Database Design
 
 ## Table Schemas
