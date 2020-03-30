@@ -26,7 +26,7 @@ export class ParkMapComponent implements OnInit {
     /* Initial basemap */
     map.addLayer(this.basemaps.Stamen_Watercolor);
     map.addLayer(this.basemaps.Esri_WorldImagery);
-    map.addLayer(this.basemaps.MapBox_StamenParkOverlay);
+    map.addLayer(this.basemaps.MapBox_StamenWatercolorParkOverlay2);
     // map.addLayer(OpenStreetMap);
 
     return map;
@@ -34,7 +34,7 @@ export class ParkMapComponent implements OnInit {
 
   getBasemaps() {
     return {
-      MapBox_StamenParkOverlay: L.tileLayer('https://api.mapbox.com/styles/v1/corylrwisc/ck8dudk673hje1iqldtn79b6u/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY29yeWxyd2lzYyIsImEiOiJjaXkzdGllZmEwMDBtMzNyemNhaWxlN3h5In0.t0iSfDDNY9DDB0Yn1gU1ew', {
+      MapBox_StamenWatercolorParkOverlay2: L.tileLayer('https://api.mapbox.com/styles/v1/corylrwisc/ck8dvx2bu1crz1iqsekh7z0qb/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY29yeWxyd2lzYyIsImEiOiJjaXkzdGllZmEwMDBtMzNyemNhaWxlN3h5In0.t0iSfDDNY9DDB0Yn1gU1ew', {
         minZoom: 14,
         maxZoom: 18,
         className: "basemap-basic-transparent-background",
