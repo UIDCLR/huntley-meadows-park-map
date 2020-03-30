@@ -5,6 +5,7 @@
 
 # Resources
 
+- [MapBox Studio](https://studio.mapbox.com)
 - [User Authentication with the MEAN Stack](https://www.sitepoint.com/user-authentication-mean-stack/)
 
 # Continued Development
