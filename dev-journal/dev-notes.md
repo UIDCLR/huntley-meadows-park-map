@@ -1,7 +1,9 @@
 
 # Notes
 
-- Initialized repository
+# Crunch time
+
+- 
 
 # Resources
 

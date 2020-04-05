@@ -23,9 +23,9 @@ export class ParkMapComponent implements OnInit {
       attributionControl: false,
     }).setView([38.753, -77.106], 14);
 
-    map.zoomControl.setPosition('bottomleft');
+    map.zoomControl.setPosition('bottomright');
     L.control.scale({
-      position: "bottomright"
+      position: "bottomleft"
     }).addTo(map);
 
     /* Initial basemap */

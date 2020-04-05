@@ -6,7 +6,7 @@
   bottom: 0;
 
   $header-section-height: 60px;
-  $controls-section-height: 120px;
+  $controls-section-height: 180px;
 
   .header-section {
     height: $header-section-height;
@@ -47,6 +47,8 @@
 
   .controls-section {
     height: $controls-section-height;
-    background-color: darkgray;
+    background-color: hsl(45, 64%, 91%);
+    // background-color: hsl(45, 97%, 97%);
+    border-top: 2px solid hsl(46, 31%, 14%);
   }
 }
