@@ -5,6 +5,7 @@
 
 # Resources
 
+- Updating to Angular 9 guide: https://update.angular.io/#8.0:9.0
 - [MapBox Studio](https://studio.mapbox.com)
 - [User Authentication with the MEAN Stack](https://www.sitepoint.com/user-authentication-mean-stack/)
 
