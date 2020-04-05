@@ -13,9 +13,11 @@
 
 # Continued Development
 
-- `heroku local` Starts the app locally using the app's Node Express server
+- `ng build && heroku local` Starts the app locally using the app's Node Express server
+  - Requires local keys:
+    1. `heroku config:get DATABASE_URL -s  >> .env`
   - Useful for back-end testing / must use if there is no mockdata
-  - port 4200 is default: http://localhost:4200
+  - port 5000 is default: http://localhost:5000
 - `ng serve` Starts front-end of the app locally using Angular
   - Useful for front-end testing
   - port 4200 is default: http://localhost:4200

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-park-map',
@@ -11,10 +12,11 @@ export class ParkMapComponent implements OnInit {
   map;
   basemaps = this.getBasemaps();
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.map = this.initializeMap();
+    this.test();
   }
 
   initializeMap() {
@@ -58,6 +60,15 @@ export class ParkMapComponent implements OnInit {
         maxZoom: 18,
       }),
     }
+  }
+
+  test() {
+    this.http.get("/getlocalfavorites").subscribe((data: any) => {
+      console.log(">>> data:");
+      console.log(JSON.parse(data));
+
+    });
+
   }
 
 }
