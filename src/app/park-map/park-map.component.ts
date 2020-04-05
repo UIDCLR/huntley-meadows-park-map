@@ -23,6 +23,11 @@ export class ParkMapComponent implements OnInit {
       attributionControl: false,
     }).setView([38.753, -77.106], 14);
 
+    map.zoomControl.setPosition('bottomleft');
+    L.control.scale({
+      position: "bottomright"
+    }).addTo(map);
+
     /* Initial basemap */
     map.addLayer(this.basemaps.Stamen_Watercolor);
     map.addLayer(this.basemaps.Esri_WorldImagery);

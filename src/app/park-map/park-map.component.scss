@@ -6,8 +6,34 @@
   top: 0;
   bottom: 0;
 
+  $header-section-height: 60px;
+  $controls-section-height: 120px;
+
+  .header-section {
+    height: $header-section-height;
+    color: white;
+    background-color: rgb(97, 97, 97);
+    -webkit-text-shadow: 0 0 5px rgba(0, 0, 0, 1.0);
+    -moz-text-shadow: 0 0 5px rgba(0, 0, 0, 1.0);
+    text-shadow: 0 0 5px rgba(0, 0, 0, 1.0);
+    
+    .title-main {
+      display: inline-block;
+      margin: 13px;
+      padding: 0;
+    }
+    .title-sub {
+      display: inline-block;
+      margin: 13px 13px 13px 0px;
+      padding: 0;
+    }
+  }
   #park-map {
-    height: 100%;
+    height: calc( 100% - #{$header-section-height + $controls-section-height} );
     width: 100%;
+  }
+  .controls-section{
+    height: $controls-section-height;
+    background-color: darkgray;
   }
 }
