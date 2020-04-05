@@ -1,4 +1,3 @@
-
 .park-map-wrapper {
   height: 100vh;
   width: 100vw;
@@ -12,27 +11,41 @@
   .header-section {
     height: $header-section-height;
     color: white;
-    background-color: rgb(97, 97, 97);
     -webkit-text-shadow: 0 0 5px rgba(0, 0, 0, 1.0);
     -moz-text-shadow: 0 0 5px rgba(0, 0, 0, 1.0);
     text-shadow: 0 0 5px rgba(0, 0, 0, 1.0);
-    
+
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.33), rgba(0, 0, 0, .5)),
+      url("/assets/img/hm-merganser-family-banner.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    @mixin title-text($margin) {
+      display: inline-block;
+      padding: 0;
+      margin: $margin;
+      position: relative;
+      z-index: 100;
+    }
+
     .title-main {
-      display: inline-block;
-      margin: 13px;
-      padding: 0;
+      @include title-text($margin: 13px);
     }
+
     .title-sub {
-      display: inline-block;
-      margin: 13px 13px 13px 0px;
-      padding: 0;
+      @include title-text($margin: 13px 13px 13px 0px);
     }
+
   }
+
   #park-map {
-    height: calc( 100% - #{$header-section-height + $controls-section-height} );
+    height: calc(100% - #{$header-section-height + $controls-section-height});
     width: 100%;
   }
-  .controls-section{
+
+  .controls-section {
     height: $controls-section-height;
     background-color: darkgray;
   }
