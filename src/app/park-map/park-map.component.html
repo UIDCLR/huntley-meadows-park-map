@@ -9,6 +9,7 @@
 
   <div class="controls-section">
     <div class="control-title">Points of Interest</div>
+    <br>
     <form [formGroup]="checkboxGroupForm">
       <div class="btn-group btn-group-toggle">
         <label class="btn-secondary" ngbButtonLabel>
@@ -23,13 +24,14 @@
       </div>
     </form>
     <div class="control-title">Recommended Walking Routes</div>
+    <br>
     <div ngbDropdown placement="top-left" class="d-inline-block">
-      <button class="btn btn-secondary" id="dropdownBasic2" ngbDropdownToggle>No Route Selected</button>
+      <button [ngClass]="{'active': currentRouteName !== noRouteSelectedString }" class="btn btn-secondary" id="dropdownBasic2" ngbDropdownToggle>{{currentRouteName}}</button>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
-        <button ngbDropdownItem>Clear</button>
-        <button ngbDropdownItem>Definitive Double-Loop</button>
-        <button ngbDropdownItem>Boardwalk Bend</button>
-        <button ngbDropdownItem>Forest Finish</button>
+        <button (click)="updateRoute(1)" ngbDropdownItem><strong>Definitive Double-Loop</strong></button>
+        <button (click)="updateRoute(2)" ngbDropdownItem><strong>Boardwalk Bend</strong></button>
+        <button (click)="updateRoute(3)" ngbDropdownItem><strong>Forest Finish</strong></button>
+        <button (click)="updateRoute(0)" ngbDropdownItem><em>(Clear)</em></button>
       </div>
     </div>
 

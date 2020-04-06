@@ -18,6 +18,18 @@ module.exports = {
 function setUrlRoutes(app) {
 
   /* Set non-angular routes (server / api calls) */
+  app.get('/getroutes', async function (req, res) {
+    queryPrimaryDatabase(`select * from recommended_routes;`, function (err, datares) {
+      if (datares && datares.rows) {
+        res.status(200).json(datares.rows);
+      } else {
+        res.status(400);
+      }
+    })
+  
+    // dataRaw = {test: "test", test2: [1, 2]};
+    // data = JSON.stringify(dataRaw);
+  })
   app.get('/getlocalfavorites', async function (req, res) {
     dataRaw = {test: "test", test2: [1, 2]};
     data = JSON.stringify(dataRaw);
