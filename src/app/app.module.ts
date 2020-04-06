@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ParkMapComponent } from './park-map/park-map.component';
 
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule} from '@angular/forms' 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -21,6 +22,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     HttpClientModule,
     NgbModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

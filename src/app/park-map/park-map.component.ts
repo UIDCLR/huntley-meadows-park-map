@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { HttpClient } from '@angular/common/http';
+import { FormBuilder, FormGroup } from '@angular/forms';
+
 
 @Component({
   selector: 'app-park-map',
@@ -9,14 +11,21 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ParkMapComponent implements OnInit {
 
+  public checkboxGroupForm: FormGroup;
+
   map;
   basemaps = this.getBasemaps();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.map = this.initializeMap();
-    this.test();
+    this.checkboxGroupForm = this.formBuilder.group({
+      left: true,
+      middle: false,
+      right: false
+    });
+    // this.test();
   }
 
   initializeMap() {

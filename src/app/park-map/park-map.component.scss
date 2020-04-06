@@ -5,6 +5,16 @@
   top: 0;
   bottom: 0;
 
+  /* Bootstrap overrides */
+  .btn-secondary {
+    color: black;
+    background-color: hsl(44, 50%, 79%);
+
+    &.active {
+      background-color: hsl(45, 48%, 58%);
+    }
+  }
+
   $header-section-height: 60px;
   $controls-section-height: 180px;
 
@@ -50,5 +60,14 @@
     background-color: hsl(45, 64%, 91%);
     // background-color: hsl(45, 97%, 97%);
     border-top: 2px solid hsl(46, 31%, 14%);
+    padding: 0 15px 15px 15px;
+
+    .control-title {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 2px 4px 2px 4px;
+      background-color: white;
+      font-weight: 600;
+    }
   }
 }

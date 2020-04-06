@@ -1,12 +1,38 @@
-
 <div class="park-map-wrapper">
 
   <div class="header-section">
-    <h3 class="title-main">Huntley Meadows </h3><h5 class="title-sub">Park Map</h5>
+    <h3 class="title-main">Huntley Meadows </h3>
+    <h5 class="title-sub">Park Map</h5>
   </div>
 
   <div id="park-map"></div>
 
-  <div class="controls-section"></div>
+  <div class="controls-section">
+    <div class="control-title">Points of Interest</div>
+    <form [formGroup]="checkboxGroupForm">
+      <div class="btn-group btn-group-toggle">
+        <label class="btn-secondary" ngbButtonLabel>
+          <input type="checkbox" formControlName="left" ngbButton> Get Started
+        </label>
+        <label class="btn-secondary" ngbButtonLabel>
+          <input type="checkbox" formControlName="middle" ngbButton> Facilities
+        </label>
+        <label class="btn-secondary" ngbButtonLabel>
+          <input type="checkbox" formControlName="right" ngbButton> Local Favorites
+        </label>
+      </div>
+    </form>
+    <div class="control-title">Recommended Walking Routes</div>
+    <div ngbDropdown placement="top-left" class="d-inline-block">
+      <button class="btn btn-secondary" id="dropdownBasic2" ngbDropdownToggle>No Route Selected</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+        <button ngbDropdownItem>Clear</button>
+        <button ngbDropdownItem>Definitive Double-Loop</button>
+        <button ngbDropdownItem>Boardwalk Bend</button>
+        <button ngbDropdownItem>Forest Finish</button>
+      </div>
+    </div>
+
+  </div>
 
 </div>
