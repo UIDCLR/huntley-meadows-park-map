@@ -36,6 +36,46 @@ create table recommended_routes (
   geojson text
 );
 
+create table poi_get_started (
+  poi_name text primary key,
+  latitude decimal(9, 6),
+  longitude decimal(9, 6)
+);
+
+create table poi_facilities (
+  poi_name text primary key,
+  latitude decimal(9, 6),
+  longitude decimal(9, 6)
+);
+
+create table poi_local_favorites (
+  poi_name text primary key,
+  latitude decimal(9, 6),
+  longitude decimal(9, 6),
+  created_time_stamp timestamptz
+);
+
+ALTER TABLE poi_local_favorites ALTER COLUMN created_time_stamp SET DEFAULT now();
+
+insert into poi_facilities (
+  poi_name, latitude, longitude
+) values (
+  'Park Entrance', 38.760167, -77.095613
+), (
+  'Parking Lot', 38.757652, -77.098406
+), (
+  'Start of Cedar Trail', 38.757334, -77.098556
+)
+;
+
+insert into poi_local_favorites (
+  poi_name, latitude, longitude
+) values (
+'Birdfeeders',
+38.756806, -77.098386
+)
+;
+
 insert into recommended_routes (
   route_name,
   geojson

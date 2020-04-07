@@ -26,15 +26,39 @@ function setUrlRoutes(app) {
         res.status(400);
       }
     })
-  
-    // dataRaw = {test: "test", test2: [1, 2]};
-    // data = JSON.stringify(dataRaw);
-  })
+  });
+  app.get('/get_poi_get_started', async function (req, res) {
+    queryPrimaryDatabase(`select * from poi_get_started;`, function (err, datares) {
+      if (datares && datares.rows) {
+        res.status(200).json(datares.rows);
+      } else {
+        res.status(400);
+      }
+    })
+  });
+  app.get('/get_poi_facilities', async function (req, res) {
+    queryPrimaryDatabase(`select * from poi_facilities;`, function (err, datares) {
+      if (datares && datares.rows) {
+        res.status(200).json(datares.rows);
+      } else {
+        res.status(400);
+      }
+    })
+  });
+  app.get('/get_poi_local_favorites', async function (req, res) {
+    queryPrimaryDatabase(`select * from poi_local_favorites;`, function (err, datares) {
+      if (datares && datares.rows) {
+        res.status(200).json(datares.rows);
+      } else {
+        res.status(400);
+      }
+    })
+  });
   app.get('/getlocalfavorites', async function (req, res) {
     dataRaw = {test: "test", test2: [1, 2]};
     data = JSON.stringify(dataRaw);
     res.status(200).json(data);
-  })
+  });
 
   /* Send all other routes to Angular app */
   app.get('*', function (req, res) {
