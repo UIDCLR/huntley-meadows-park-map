@@ -19,7 +19,9 @@ export class ParkMapComponent implements OnInit {
   currentRoute: any;
   noRouteSelectedString: string = "Select a Walking Route...";
   currentRouteName: string = this.noRouteSelectedString;
-  poi_get_started: any;
+  poi_getStarted: any;
+  poi_facilities: any;
+  poi_localFavorites: any;
 
   constructor(private http: HttpClient, private formBuilder: FormBuilder) { }
 
@@ -82,6 +84,14 @@ export class ParkMapComponent implements OnInit {
 
   }
 
+  togglePoi(poiLayer) {
+    if (this.map.hasLayer(poiLayer)) {
+      this.map.removeLayer(poiLayer);
+    } else {
+      this.map.addLayer(poiLayer);
+    }
+  }
+
   getRoutes() {
     this.http.get("/getroutes").subscribe((data: any) => {
       const routeJsons: any = {};
@@ -97,92 +107,118 @@ export class ParkMapComponent implements OnInit {
   }
 
   getPois() {
+
+    /* Make Icons */
+    let icon_getStarted = L.divIcon({
+      iconSize: [8, 8],
+      className: 'icon-get-started',
+    });
+    let icon_facilities = L.divIcon({
+      iconSize: [8, 8],
+      className: 'icon-facilities',
+    });
+    let icon_localFavorites = L.divIcon({
+      iconSize: [8, 8],
+      className: 'icon-local-favorites',
+    });
+
+    /* Get Started data */
     this.http.get("/get_poi_get_started").subscribe((data: any) => {
-      console.log("poi data: ", data);
-      let geoJsonString = `
-      {
-        "type": "FeatureCollection",
-        "features": [
-      `;
-
-      for (let poi of data) {
-        geoJsonString += `{
-          "type": "Feature",
-          "geometry": {
-              "type": "Point",
-              "coordinates": [${poi.longitude}, ${poi.latitude}]
-          },
-          "properties": {
-              "name": "${poi.poi_name}"
-          }
-        },`;
-      }
-      geoJsonString = geoJsonString.slice(0, -1) + "]}";
-
-      let icon_getStarted = L.divIcon({
-        html: `<div style="font-wight:800; color:red;">TEST</div>`,
-        iconSize: [20, 20],
-        className: 'icon-get-started',
-      });
-
-      this.poi_get_started = L.geoJSON(JSON.parse(geoJsonString), {
+      let geoJsonString = this.getPoiGeoJsonString(data);
+      this.poi_getStarted = L.geoJSON(JSON.parse(geoJsonString), {
         pointToLayer: function (feature, latlng) {
           return L.marker(latlng, { icon: icon_getStarted });
         },
         onEachFeature: (feature, layer) => {
           layer.bindTooltip(feature.properties.name, {
             permanent: true,
-            opacity: 0.7,
+            opacity: 1,
             direction: this.getTooltipDirection(feature.properties.name)
           });
         },
       });
-
-      // this.poi_get_started.bindTooltip(function (layer) {
-      //   return layer.feature.properties.name;
-      // }, {
-      //   permanent: true,
-      //   opacity: 0.7
-      // })
-
-      this.poi_get_started.addTo(this.map);
-
-      console.log("JSON.parse(geoJsonString)", JSON.parse(geoJsonString));
-      console.log("this.poi_get_started", this.poi_get_started);
-
-      // `
-      // {
-      //   "type": "FeatureCollection",
-      //   "features": [
-      //     {
-      //       "type": "Feature",
-      //       "geometry": {
-      //           "type": "Point",
-      //           "coordinates": [102.0, 0.5]
-      //       },
-      //       "properties": {
-      //           "prop0": "value0"
-      //       }
-      //     }
-      //   ]
-      // }
-      // `
-      // const routeJsons: any = {};
-      // for (let route of data) {
-      //   routeJsons[route.route_name] = route.geojson;
-      // }
-      // this.routes = {
-      //   ddl: L.geoJSON(JSON.parse(routeJsons.ddl)),
-      //   bb: L.geoJSON(JSON.parse(routeJsons.bb)),
-      //   ff: L.geoJSON(JSON.parse(routeJsons.ff)),
-      // }
+      this.poi_getStarted.addTo(this.map);
     });
+
+    /* Facilities data */
+    this.http.get("/get_poi_facilities").subscribe((data: any) => {
+      let geoJsonString = this.getPoiGeoJsonString(data);
+      this.poi_facilities = L.geoJSON(JSON.parse(geoJsonString), {
+        pointToLayer: function (feature, latlng) {
+          return L.marker(latlng, { icon: icon_facilities });
+        },
+        onEachFeature: (feature, layer) => {
+          layer.bindTooltip(feature.properties.name, {
+            permanent: true,
+            opacity: 1,
+            direction: this.getTooltipDirection(feature.properties.name)
+          });
+        },
+      });
+      // this.poi_facilities.addTo(this.map);
+    });
+
+    /* Local Favorites data */
+    this.http.get("/get_poi_local_favorites").subscribe((data: any) => {
+      let geoJsonString = this.getPoiGeoJsonString(data);
+      this.poi_localFavorites = L.geoJSON(JSON.parse(geoJsonString), {
+        pointToLayer: function (feature, latlng) {
+          return L.marker(latlng, { icon: icon_localFavorites });
+        },
+        onEachFeature: (feature, layer) => {
+          layer.bindTooltip(feature.properties.name, {
+            permanent: true,
+            opacity: 1,
+            direction: this.getTooltipDirection(feature.properties.name)
+          });
+        },
+      });
+      // this.poi_localFavorites.addTo(this.map);
+    });
+
+  }
+
+  getPoiGeoJsonString(data) {
+    let geoJsonString = `
+    {
+      "type": "FeatureCollection",
+      "features": [
+    `;
+    for (let poi of data) {
+      geoJsonString += `{
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [${poi.longitude}, ${poi.latitude}]
+        },
+        "properties": {
+            "name": "${poi.poi_name}"
+        }
+      },`;
+    }
+    geoJsonString = geoJsonString.slice(0, -1) + "]}";
+    return geoJsonString;
   }
 
   getTooltipDirection(name) {
-    if (name === "Park Entrance" || name === "Start of Cedar Trail") {
+    const nameTrim = name.trim()
+    if (
+      nameTrim === "Park Entrance"
+      || nameTrim === "Start of Cedar Trail"
+      || nameTrim === "Park Pavilion"
+      || nameTrim === "Observation Deck"
+      || nameTrim === "Hawk Hub"
+      || nameTrim === "Woodpecker Woods"
+    ) {
       return "left"
-    } else if (name === "Parking Lot") {
+    } else if (
+      nameTrim === "Parking Lot"
+      || nameTrim === "Nature Center"
+      || nameTrim === "Birdfeeders"
+      || nameTrim === "Frog Pond"
+      || nameTrim === "Environmental Monitoring Sensor"
+      || nameTrim === "Observation Tower"
+    ) {
       return "right"
     } else {
       return "auto"

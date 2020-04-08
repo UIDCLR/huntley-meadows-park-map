@@ -12,5 +12,26 @@ html {
     padding: 0;
     font-family: MiloTE, MiloTESec, Charter, "Bitstream Charter", "Iowan Old Style", "Calisto MT", serif;
     font-size: 16px;
+
+    /* Leaflet Icons */
+    @mixin leaflet-simple-point-marker($color) {
+      border-radius: 50%;
+      // border: 2px solid rgb(63, 63, 63);
+      -webkit-box-shadow: 0 0 4px black;
+      -moz-box-shadow: 0 0 4px black;
+      box-shadow: 0 0 4px black;
+      background-color: $color;
+    }
+    .icon-get-started {
+      @include leaflet-simple-point-marker(hsl(125, 100%, 44%));
+    }
+    .icon-facilities {
+      @include leaflet-simple-point-marker(hsl(194, 100%, 44%));
+    }
+    .icon-local-favorites {
+      @include leaflet-simple-point-marker(hsl(45, 100%, 44%));
+    }
+
+
   }
 }
