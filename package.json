@@ -25,6 +25,7 @@
     "bootstrap": "^4.4.1",
     "dotenv": "^8.2.0",
     "leaflet": "^1.6.0",
+    "leaflet.zoomhome": "^0.3.0",
     "pg": "7.12.1",
     "rxjs": "~6.5.5",
     "tslib": "^1.10.0",

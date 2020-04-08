@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
+import 'leaflet.zoomhome/dist/leaflet.zoomhome.min.js';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -41,11 +42,13 @@ export class ParkMapComponent implements OnInit {
 
   initializeMap() {
     const map = L.map('park-map', {
-      // zoomControl: false,
+      zoomControl: false,
       attributionControl: false,
     }).setView([38.753, -77.103], 14);
+    // map.zoomControl.setPosition('bottomright');
 
-    map.zoomControl.setPosition('bottomright');
+    L.Control.zoomHome().setPosition('bottomright').addTo(map);
+
     L.control.scale({
       position: "bottomleft"
     }).addTo(map);
