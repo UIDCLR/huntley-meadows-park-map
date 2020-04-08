@@ -53,6 +53,10 @@
   #park-map {
     height: calc(100% - #{$header-section-height + $controls-section-height});
     width: 100%;
+
+    .icon-get-started {
+      background-color:green;
+    }
   }
 
   .controls-section {

@@ -120,17 +120,20 @@ export class ParkMapComponent implements OnInit {
       geoJsonString = geoJsonString.slice(0, -1) + "]}";
 
       let icon_getStarted = L.divIcon({
-        html: `x`,
+        html: `<div style="font-wight:800; color:red;">TEST</div>`,
         iconSize: [20, 20],
         className: 'icon-get-started',
       });
 
       this.poi_get_started = L.geoJSON(JSON.parse(geoJsonString), {
-        icon: icon_getStarted,
+        pointToLayer: function (feature, latlng) {
+          return L.marker(latlng, { icon: icon_getStarted });
+        },
         onEachFeature: (feature, layer) => {
           layer.bindTooltip(feature.properties.name, {
             permanent: true,
-            opacity: 0.7
+            opacity: 0.7,
+            direction: this.getTooltipDirection(feature.properties.name)
           });
         },
       });
@@ -176,6 +179,16 @@ export class ParkMapComponent implements OnInit {
     });
   }
 
+  getTooltipDirection(name) {
+    if (name === "Park Entrance" || name === "Start of Cedar Trail") {
+      return "left"
+    } else if (name === "Parking Lot") {
+      return "right"
+    } else {
+      return "auto"
+    }
+  }
+
   getBasemaps() {
     return {
       MapBox_StamenWatercolorParkOverlay2: L.tileLayer('https://api.mapbox.com/styles/v1/corylrwisc/ck8dvx2bu1crz1iqsekh7z0qb/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY29yeWxyd2lzYyIsImEiOiJjaXkzdGllZmEwMDBtMzNyemNhaWxlN3h5In0.t0iSfDDNY9DDB0Yn1gU1ew', {
@@ -197,14 +210,6 @@ export class ParkMapComponent implements OnInit {
         maxZoom: 18,
       }),
     }
-  }
-
-  test() {
-    this.http.get("/getlocalfavorites").subscribe((data: any) => {
-      console.log(">>> data:");
-      console.log(JSON.parse(data));
-    });
-
   }
 
 }
