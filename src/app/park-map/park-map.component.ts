@@ -140,7 +140,7 @@ export class ParkMapComponent implements OnInit {
 
     /* Get Started data */
     this.http.get("/get_poi_get_started").subscribe((data: any) => {
-      let geoJsonString = this.getPoiGeoJsonString(data);
+      let geoJsonString = this.getPoiGeoJsonString(data, "Get Started Info");
       this.poi_getStarted = L.geoJSON(JSON.parse(geoJsonString), {
         pointToLayer: function (feature, latlng) {
           return L.marker(latlng, { icon: icon_getStarted });
@@ -152,6 +152,15 @@ export class ParkMapComponent implements OnInit {
             direction: this.getTooltipDirection(feature.properties.name),
             interactive: true
           });
+          layer.bindPopup(`
+            <strong>${feature.properties.name}</strong>
+            <div>${feature.properties.category}</div>
+            <div><a target="_blank" href="https://www.google.com/maps/?q=${feature.geometry.coordinates[1]},${feature.geometry.coordinates[0]}">
+            <button type="button" class="btn btn-light popup-button">
+              Open in Google Maps
+            </button>  
+            </a></div>
+          `);
         },
       });
       this.poi_getStarted.addTo(this.map);
@@ -159,7 +168,7 @@ export class ParkMapComponent implements OnInit {
 
     /* Facilities data */
     this.http.get("/get_poi_facilities").subscribe((data: any) => {
-      let geoJsonString = this.getPoiGeoJsonString(data);
+      let geoJsonString = this.getPoiGeoJsonString(data, "Facility");
       this.poi_facilities = L.geoJSON(JSON.parse(geoJsonString), {
         pointToLayer: function (feature, latlng) {
           return L.marker(latlng, { icon: icon_facilities });
@@ -168,8 +177,18 @@ export class ParkMapComponent implements OnInit {
           layer.bindTooltip(feature.properties.name, {
             permanent: true,
             opacity: 1,
-            direction: this.getTooltipDirection(feature.properties.name)
+            direction: this.getTooltipDirection(feature.properties.name),
+            interactive: true
           });
+          layer.bindPopup(`
+            <strong>${feature.properties.name}</strong>
+            <div>${feature.properties.category}</div>
+            <div><a target="_blank" href="https://www.google.com/maps/?q=${feature.geometry.coordinates[1]},${feature.geometry.coordinates[0]}">
+            <button type="button" class="btn btn-light popup-button">
+              Open in Google Maps
+            </button>  
+            </a></div>
+          `);
         },
       });
       // this.poi_facilities.addTo(this.map);
@@ -177,7 +196,7 @@ export class ParkMapComponent implements OnInit {
 
     /* Local Favorites data */
     this.http.get("/get_poi_local_favorites").subscribe((data: any) => {
-      let geoJsonString = this.getPoiGeoJsonString(data);
+      let geoJsonString = this.getPoiGeoJsonString(data, "Local Favorite");
       this.poi_localFavorites = L.geoJSON(JSON.parse(geoJsonString), {
         pointToLayer: function (feature, latlng) {
           return L.marker(latlng, { icon: icon_localFavorites });
@@ -186,8 +205,18 @@ export class ParkMapComponent implements OnInit {
           layer.bindTooltip(feature.properties.name, {
             permanent: true,
             opacity: 1,
-            direction: this.getTooltipDirection(feature.properties.name)
+            direction: this.getTooltipDirection(feature.properties.name),
+            interactive: true
           });
+          layer.bindPopup(`
+            <strong>${feature.properties.name}</strong>
+            <div>${feature.properties.category}</div>
+            <div><a target="_blank" href="https://www.google.com/maps/?q=${feature.geometry.coordinates[1]},${feature.geometry.coordinates[0]}">
+            <button type="button" class="btn btn-light popup-button">
+              Open in Google Maps
+            </button>  
+            </a></div>
+          `);
         },
       });
       // this.poi_localFavorites.addTo(this.map);
@@ -195,7 +224,7 @@ export class ParkMapComponent implements OnInit {
 
   }
 
-  getPoiGeoJsonString(data) {
+  getPoiGeoJsonString(data, category) {
     let geoJsonString = `
     {
       "type": "FeatureCollection",
@@ -209,7 +238,8 @@ export class ParkMapComponent implements OnInit {
             "coordinates": [${poi.longitude}, ${poi.latitude}]
         },
         "properties": {
-            "name": "${poi.poi_name}"
+            "name": "${poi.poi_name}",
+            "category": "${category}"
         }
       },`;
     }

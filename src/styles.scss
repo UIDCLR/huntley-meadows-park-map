@@ -13,6 +13,20 @@ html {
     font-family: MiloTE, MiloTESec, Charter, "Bitstream Charter", "Iowan Old Style", "Calisto MT", serif;
     font-size: 16px;
 
+    /* Bootstrap overrides */
+    .popup-button {
+      border: 1px solid rgb(160, 160, 160);
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    /* Leaflet overrides */
+    .leaflet-popup-content {
+      display: block;
+      text-align: center;
+      font-size: 16px;
+    }
+
     /* Leaflet Icons */
     @mixin leaflet-simple-point-marker($color) {
       border-radius: 50%;
@@ -22,12 +36,15 @@ html {
       box-shadow: 0 0 4px black;
       background-color: $color;
     }
+
     .icon-get-started {
       @include leaflet-simple-point-marker($poi_getStarted);
     }
+
     .icon-facilities {
       @include leaflet-simple-point-marker($poi_facilities)
     }
+
     .icon-local-favorites {
       @include leaflet-simple-point-marker($poi_localFavorites);
     }
