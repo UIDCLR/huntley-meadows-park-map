@@ -34,13 +34,16 @@ export class ParkMapComponent implements OnInit {
     });
     this.getRoutes();
     this.getPois();
+    // setTimeout(() => {
+    //   this.updateRoute(1);
+    // }, 200);
   }
 
   initializeMap() {
     const map = L.map('park-map', {
       // zoomControl: false,
       attributionControl: false,
-    }).setView([38.753, -77.106], 14);
+    }).setView([38.753, -77.103], 14);
 
     map.zoomControl.setPosition('bottomright');
     L.control.scale({
@@ -52,7 +55,6 @@ export class ParkMapComponent implements OnInit {
     map.addLayer(this.basemaps.Esri_WorldImagery);
     map.addLayer(this.basemaps.MapBox_StamenWatercolorParkOverlay2);
     // map.addLayer(OpenStreetMap);
-
     return map;
   }
 
@@ -99,10 +101,24 @@ export class ParkMapComponent implements OnInit {
         routeJsons[route.route_name] = route.geojson;
       }
       this.routes = {
-        ddl: L.geoJSON(JSON.parse(routeJsons.ddl)),
-        bb: L.geoJSON(JSON.parse(routeJsons.bb)),
-        ff: L.geoJSON(JSON.parse(routeJsons.ff)),
+        ddl: L.geoJSON(JSON.parse(routeJsons.ddl), {
+          style: function (feature) {
+            return { color: "#fabc00", weight: 5 };
+          }
+        }),
+        bb: L.geoJSON(JSON.parse(routeJsons.bb), {
+          style: function (feature) {
+            return { color: "#fabc00", weight: 5 };
+          }
+        }),
+        ff: L.geoJSON(JSON.parse(routeJsons.ff), {
+          style: function (feature) {
+            return { color: "#fabc00", weight: 5 };
+          }
+        }),
       }
+      /* Include this if we want to set an initial visible route */
+      // this.updateRoute(1);
     });
   }
 
@@ -133,7 +149,8 @@ export class ParkMapComponent implements OnInit {
           layer.bindTooltip(feature.properties.name, {
             permanent: true,
             opacity: 1,
-            direction: this.getTooltipDirection(feature.properties.name)
+            direction: this.getTooltipDirection(feature.properties.name),
+            interactive: true
           });
         },
       });

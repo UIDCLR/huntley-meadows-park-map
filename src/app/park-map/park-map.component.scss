@@ -11,22 +11,60 @@
   .btn-secondary {
     color: black;
     background-color: hsl(44, 36%, 82%);
+    padding-left: 7px;
+    padding-right: 10px;
 
     &.active {
-      background-color: hsl(45, 79%, 60%);
+      background-color: #ddc784;
+
+      .line {
+        color: #fabc00;
+      }
     }
   }
 
-  .button-get-started.active {
-    background-color: desaturate(lighten($poi_getStarted, 10%), 1%);
+  .line {
+    color: lightgray;
+    text-shadow:
+      /* 1px in all 8 directions */
+      // 0px -1px 0 black, // ↑
+      1px -1px 0 black, // ↗
+      // 1px 0px 0 black, // →
+      1px 1px 0 black, // ↘
+      // 0px 1px 0 black, // ↓
+      -1px 1px 0 black, // ↙
+      // -1px 0px 0 black, // ←
+      -1px -1px 0 black, // ↖
+    ;
+
   }
 
-  .button-facilities.active {
-    background-color: desaturate(lighten($poi_facilities, 10%), 1%);
+  .circle {
+    color: lightgray;
+    font-size: 18px;
+    text-shadow:
+      /* 1px in all 8 directions */
+      // 0px -1px 0 black, // ↑
+      1px -1px 0 black, // ↗
+      // 1px 0px 0 black, // →
+      1px 1px 0 black, // ↘
+      // 0px 1px 0 black, // ↓
+      -1px 1px 0 black, // ↙
+      // -1px 0px 0 black, // ←
+      -1px -1px 0 black, // ↖
+    ;
   }
 
-  .button-local-favorites.active {
-    background-color: desaturate(lighten($poi_localFavorites, 10%), 1%);
+  .button-get-started.active .circle {
+    color: $poi_getStarted;
+  }
+
+  .button-facilities.active .circle {
+    color: $poi_facilities;
+  }
+
+  .button-local-favorites.active .circle {
+    color: $poi_localFavorites;
   }
 
   $header-section-height: 60px;

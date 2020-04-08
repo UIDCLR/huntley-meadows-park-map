@@ -13,20 +13,20 @@
     <form [formGroup]="checkboxGroupForm">
       <div class="btn-group btn-group-toggle">
         <label class="btn-secondary button-get-started" ngbButtonLabel>
-          <input type="checkbox" (click)="togglePoi(poi_getStarted)" formControlName="left" ngbButton> Get Started
+          <input type="checkbox" (click)="togglePoi(poi_getStarted)" formControlName="left" ngbButton><span class="circle">&#9679;</span> Get Started
         </label>
         <label class="btn-secondary button-facilities" ngbButtonLabel>
-          <input type="checkbox" (click)="togglePoi(poi_facilities)" formControlName="middle" ngbButton> Facilities
+          <input type="checkbox" (click)="togglePoi(poi_facilities)" formControlName="middle" ngbButton><span class="circle">&#9679;</span> Facilities
         </label>
         <label class="btn-secondary button-local-favorites" ngbButtonLabel>
-          <input type="checkbox" (click)="togglePoi(poi_localFavorites)" formControlName="right" ngbButton> Local Favorites
+          <input type="checkbox" (click)="togglePoi(poi_localFavorites)" formControlName="right" ngbButton><span class="circle">&#9679;</span> Local Favorites
         </label>
       </div>
     </form>
     <div class="control-title">Recommended Walking Routes</div>
     <br>
     <div ngbDropdown placement="top-left" class="d-inline-block">
-      <button [ngClass]="{'active': currentRouteName !== noRouteSelectedString }" class="btn btn-secondary" id="dropdownBasic2" ngbDropdownToggle>{{currentRouteName}}</button>
+      <button [ngClass]="{'active': currentRouteName !== noRouteSelectedString }" class="btn btn-secondary" id="dropdownBasic2" ngbDropdownToggle><span class="line">&#9644;</span> {{currentRouteName}}</button>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
         <button (click)="updateRoute(1)" ngbDropdownItem><strong>Definitive Double-Loop</strong></button>
         <button (click)="updateRoute(2)" ngbDropdownItem><strong>Boardwalk Bend</strong></button>
