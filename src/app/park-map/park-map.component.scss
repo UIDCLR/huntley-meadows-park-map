@@ -1,3 +1,5 @@
+@import '../../scss/common';
+
 .park-map-wrapper {
   height: 100vh;
   width: 100vw;
@@ -8,11 +10,23 @@
   /* Bootstrap overrides */
   .btn-secondary {
     color: black;
-    background-color: hsl(44, 50%, 79%);
+    background-color: hsl(44, 36%, 82%);
 
     &.active {
-      background-color: hsl(45, 63%, 61%);
+      background-color: hsl(45, 79%, 60%);
     }
+  }
+
+  .button-get-started.active {
+    background-color: desaturate(lighten($poi_getStarted, 10%), 1%);
+  }
+
+  .button-facilities.active {
+    background-color: desaturate(lighten($poi_facilities, 10%), 1%);
+  }
+
+  .button-local-favorites.active {
+    background-color: desaturate(lighten($poi_localFavorites, 10%), 1%);
   }
 
   $header-section-height: 60px;

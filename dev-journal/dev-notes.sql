@@ -68,6 +68,8 @@ insert into poi_facilities (
 )
 ;
 
+update poi_facilities set poi_name = ''
+
 insert into poi_local_favorites (
   poi_name, latitude, longitude
 ) values (

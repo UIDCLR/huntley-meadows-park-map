@@ -12,13 +12,13 @@
     <br>
     <form [formGroup]="checkboxGroupForm">
       <div class="btn-group btn-group-toggle">
-        <label class="btn-secondary" ngbButtonLabel>
+        <label class="btn-secondary button-get-started" ngbButtonLabel>
           <input type="checkbox" (click)="togglePoi(poi_getStarted)" formControlName="left" ngbButton> Get Started
         </label>
-        <label class="btn-secondary" ngbButtonLabel>
+        <label class="btn-secondary button-facilities" ngbButtonLabel>
           <input type="checkbox" (click)="togglePoi(poi_facilities)" formControlName="middle" ngbButton> Facilities
         </label>
-        <label class="btn-secondary" ngbButtonLabel>
+        <label class="btn-secondary button-local-favorites" ngbButtonLabel>
           <input type="checkbox" (click)="togglePoi(poi_localFavorites)" formControlName="right" ngbButton> Local Favorites
         </label>
       </div>

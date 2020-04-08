@@ -110,15 +110,15 @@ export class ParkMapComponent implements OnInit {
 
     /* Make Icons */
     let icon_getStarted = L.divIcon({
-      iconSize: [8, 8],
+      iconSize: [10, 10],
       className: 'icon-get-started',
     });
     let icon_facilities = L.divIcon({
-      iconSize: [8, 8],
+      iconSize: [10, 10],
       className: 'icon-facilities',
     });
     let icon_localFavorites = L.divIcon({
-      iconSize: [8, 8],
+      iconSize: [10, 10],
       className: 'icon-local-favorites',
     });
 

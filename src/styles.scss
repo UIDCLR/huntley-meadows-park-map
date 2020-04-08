@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~leaflet/dist/leaflet.css";
 @import '~bootstrap/scss/bootstrap.scss';
-
+@import 'scss/common';
 
 html {
   margin: 0;
@@ -23,13 +23,13 @@ html {
       background-color: $color;
     }
     .icon-get-started {
-      @include leaflet-simple-point-marker(hsl(125, 100%, 44%));
+      @include leaflet-simple-point-marker($poi_getStarted);
     }
     .icon-facilities {
-      @include leaflet-simple-point-marker(hsl(194, 100%, 44%));
+      @include leaflet-simple-point-marker($poi_facilities)
     }
     .icon-local-favorites {
-      @include leaflet-simple-point-marker(hsl(45, 100%, 44%));
+      @include leaflet-simple-point-marker($poi_localFavorites);
     }
 
 
