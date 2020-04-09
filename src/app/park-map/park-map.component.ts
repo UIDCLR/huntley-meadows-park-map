@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import 'leaflet.zoomhome/dist/leaflet.zoomhome.min.js';
+import 'leaflet.locatecontrol/dist/L.Control.Locate.min.js';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -57,6 +58,12 @@ export class ParkMapComponent implements OnInit {
     L.control.scale({
       position: "bottomleft"
     }).addTo(map);
+
+    L.control.locate({
+      position: "bottomright",
+      flyTo: true
+    }).addTo(map);
+
 
     /* Initial basemap */
     map.addLayer(this.basemaps.Stamen_Watercolor);
@@ -205,7 +212,7 @@ export class ParkMapComponent implements OnInit {
     /* Local Favorites data */
     this.http.get("/get_poi_local_favorites").subscribe((data: any) => {
       let geoJsonString = this.getPoiGeoJsonString(data, "Local Favorite");
-      console.log("Local Favorites", JSON.parse(geoJsonString))
+      // console.log("Local Favorites", JSON.parse(geoJsonString))
       this.poi_localFavorites = L.geoJSON(JSON.parse(geoJsonString), {
         pointToLayer: function (feature, latlng) {
           return L.marker(latlng, { icon: icon_localFavorites });

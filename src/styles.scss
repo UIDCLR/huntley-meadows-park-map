@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~leaflet/dist/leaflet.css";
 @import '~bootstrap/scss/bootstrap.scss';
+@import '~leaflet.locatecontrol/dist/L.Control.Locate.min.css';
 @import 'scss/common';
 
 html {
@@ -33,6 +34,11 @@ html {
     .leaflet-control-zoomhome-home {
       i::before {
         content: "\2302" !important;
+      }
+    }
+    .leaflet-control-locate {
+      .fa::before {
+        content: "\25C9" !important;
       }
     }
 
