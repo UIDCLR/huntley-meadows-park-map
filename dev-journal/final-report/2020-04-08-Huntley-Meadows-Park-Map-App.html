@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Building an Interactive Park Map</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        <link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+    </head>
+    <body class="vscode-light">
+        <h1 id="building-an-interactive-park-map">Building an Interactive Park Map</h1>
+<p><strong>Project 2 Report</strong></p>
+<p>2020-04-08</p>
+<p>Cory Leigh Rahman, University of Wisconsin-Madison, Master's in GIS &amp; Web Map Programming, GEOG 777: Capstone in GIS Development</p>
+<h1 id="introduction">Introduction</h1>
+<p>An interactive park map application was created for Huntley Meadows Park in Fairfax County, Virginia. The map application primarily helps users navigate the park and discover places to visit within the park.</p>
+<h2 id="about-huntley-meadows-park">About Huntley Meadows Park</h2>
+<p>Huntley Meadows Park is a 1452-acre park located just south of Washington D.C. in Fairfax County, Virginia. The land was originally purchased by George Mason in 1757 but is now owned by Fairfax County.The park is now a vital, biodiverse forest and wetland, home to over 30 species of mammals, 50 species of reptiles, amphibians and dragonflies, 200 species of birds and 600 species of plants. The park is frequented by over 200,000 visitors per year.</p>
+<h1 id="user-centered-design">User-Centered Design</h1>
+<p><img src="file:////Users/clr/code/huntley-meadows-park-map/dev-journal/final-report/images/standard-1.png#3rd" alt="Standard View 1">
+<img src="file:////Users/clr/code/huntley-meadows-park-map/dev-journal/final-report/images/standard-2.png#3rd" alt="Standard View 2">
+<img src="file:////Users/clr/code/huntley-meadows-park-map/dev-journal/final-report/images/standard-3.png#3rd" alt="Standard View 3"></p>
+<p>User Stories:</p>
+<ul>
+<li>As an interested local, I want easy guidance on how to get started</li>
+<li>As a visitor, I want to know where I can explore in the park</li>
+<li>As a visitor, I recommendations for things to see within the park</li>
+<li>As a visitor, I want to know where the restrooms and other facilities are</li>
+<li>As a frequent visitor, I want to point out places of interest to others</li>
+</ul>
+<p>All design decisions stem from the purposes outlined in these User Stories.</p>
+<h2 id="responsive-design">Responsive Design</h2>
+<p>The Park Map was designed with a mobile-first approach so that users can use the app on their phones while physically exploring the park. Active development was done using the iPhone 6/7/8 screen size to ensure a mobile-first approach. In addition, nearly all controls were kept towards the bottom of the screen so that mobile users have an easier time interacting with them using their thumbs.</p>
+<h2 id="map-layers">Map Layers</h2>
+<p>Most map layers are hidden on the initial view in order to avoid overwhelming the user; however, all these map layers are available and help fulfill the app purposes outlined in the User Stories.</p>
+<ul>
+<li>Geting Started Points of Interest (Initial View)</li>
+<li>Facilities</li>
+<li>Local Favorites Points of Interest (User-added)</li>
+<li>Definitive Double-Loop Walking Route</li>
+<li>Boardwalk Bend Walking Route</li>
+<li>Forest Finish Walking Route</li>
+<li>Mapbox Basic Edited/Transparent (TileLayer Overlay, Initial View)</li>
+<li>Stamen Watercolor (Basemap, Initial View)</li>
+<li>Esri World Imagery (Basemap)</li>
+</ul>
+<p>The basemap is actually three different TileLayers working together to create a powerful and dynamic backbone for the application.</p>
+<table>
+<thead>
+<tr>
+<th>Basemap</th>
+<th>Zoom Levels</th>
+<th>Characteristics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. MapBox Basic Edited Overlay</td>
+<td>14-18</td>
+<td>Labels, paths, landmarks</td>
+</tr>
+<tr>
+<td>2. Stamen Watercolor</td>
+<td>14-16</td>
+<td>Beautiful watercolor-style art</td>
+</tr>
+<tr>
+<td>3. Esri Imagery</td>
+<td>17-18</td>
+<td>Detailed park imagery</td>
+</tr>
+</tbody>
+</table>
+<p>The user is limited to zoom levels 14-18 so that they do not get lost. Each zoom level available to the user has been carefully thought-out and purposefully included.</p>
+<table>
+<thead>
+<tr>
+<th>Zoom Level</th>
+<th>Basemap Information</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>14</td>
+<td>Overview of the park Stamen Watercolor's park outline</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Paths appear throughout the park map</td>
+</tr>
+<tr>
+<td>16</td>
+<td>A new watercolor texture appears with more crisp paths</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Imagery and path labels appear</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Imagery is easier to see</td>
+</tr>
+</tbody>
+</table>
+<h2 id="application-functions">Application Functions</h2>
+<ul>
+<li><strong>Checkbox-button style layer toggles for Points of Interest (POI) layers</strong>
+<ul>
+<li>These toggles not only make it easy for mobile users to quickly toggle POI layers, but they also act as a legend, dynamically highlighting and coloring to clearly show which layers are active.</li>
+</ul>
+</li>
+<li><strong>Open in Google Maps</strong>
+<ul>
+<li>Selecting any in-map tooltip layer allows the user to open the coordinates for that point in Google Maps, allowing the location to be easily shared and navigated-to. For example, a user could select &quot;Park Entrance&quot; to easily get driving directions from Google.</li>
+</ul>
+</li>
+<li><strong>Drop-up style layer toggle for Recommended Walking Route layers</strong>
+<ul>
+<li>This toggle style prevents the user from getting confused by overlapping routes, and also acts as a legend when enabled.</li>
+</ul>
+</li>
+<li><strong>Return Home</strong>
+<ul>
+<li>Selecting the Home button in-between the zoom buttons returns the user back to the initial map view if they get lost</li>
+</ul>
+</li>
+<li><strong>Show Me Where I Am</strong>
+<ul>
+<li>The Geolocation button above the home/zoom controls allows the user to see where they are on the map indicated by a blue, pulsing circle-marker. This feature is crucial as it allows users to see if they're on the right track, or near points of interest.</li>
+</ul>
+</li>
+<li><strong>User Local Favorite Submissions</strong>
+<ul>
+<li>The app allows frequent visitors to submit their own &quot;Local Favorites&quot; for others to discover.</li>
+</ul>
+</li>
+<li><strong>About Modal</strong>
+<ul>
+<li>The About modal (information window) provides the user with additional information about the park, as well as providing space for the User Submission form.</li>
+</ul>
+</li>
+</ul>
+<p><img src="file:////Users/clr/code/huntley-meadows-park-map/dev-journal/final-report/images/google-maps.png#4th" alt="Google Maps">
+<img src="file:////Users/clr/code/huntley-meadows-park-map/dev-journal/final-report/images/recommended-routes.png#4th" alt="Recommended Routes">
+<img src="file:////Users/clr/code/huntley-meadows-park-map/dev-journal/final-report/images/about.png#4th" alt="About Modal">
+<img src="file:////Users/clr/code/huntley-meadows-park-map/dev-journal/final-report/images/user-submission.png#4th" alt="User Submission"></p>
+<h1 id="implementation">Implementation</h1>
+<p>Tech Stack:</p>
+<table>
+<thead>
+<tr>
+<th>Technology</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Leaflet</td>
+<td>Interactive mapping JavaScript Library</td>
+</tr>
+<tr>
+<td>Bootstrap</td>
+<td>Front-end UI Component Library</td>
+</tr>
+<tr>
+<td>Angular</td>
+<td>Front-end JavaScript framework</td>
+</tr>
+<tr>
+<td>NPM</td>
+<td>Front-end package manager</td>
+</tr>
+<tr>
+<td>Node Express Server</td>
+<td>Server for API for database interaction</td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td>Database system</td>
+</tr>
+<tr>
+<td>Heroku</td>
+<td>Platform &amp; host</td>
+</tr>
+<tr>
+<td>VS Code</td>
+<td>IDE / code editor</td>
+</tr>
+<tr>
+<td>QGIS</td>
+<td>Desktop GIS software</td>
+</tr>
+</tbody>
+</table>
+<h2 id="front-end">Front-End</h2>
+<p>Angular, Leaflet, and Bootstrap were the clear picks for front-end technologies. Angular provided the framework for ease of development, Leaflet is a world-renowned mapping tool, and Bootstrap provided quick and customizable UI components. In addition, Leaflet's rich selection of plugins were particularly useful for features such as the Return Home and Locate Me functions.</p>
+<pre><code class="language-typescript"><div><span class="hljs-keyword">import</span> { Component, OnInit } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> L <span class="hljs-keyword">from</span> <span class="hljs-string">'leaflet'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">'leaflet.zoomhome/dist/leaflet.zoomhome.min.js'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">'leaflet.locatecontrol/dist/L.Control.Locate.min.js'</span>;
+<span class="hljs-keyword">import</span> { HttpClient } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common/http'</span>;
+<span class="hljs-keyword">import</span> { FormBuilder, FormGroup } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/forms'</span>;
+<span class="hljs-keyword">import</span> { NgbModal } <span class="hljs-keyword">from</span> <span class="hljs-string">'@ng-bootstrap/ng-bootstrap'</span>;
+</div></code></pre>
+<p>These are the import statements from the <code>ParkMapComponent</code> TypeScript file. Features were used heavily from Angular, Leaflet and Bootstrap.</p>
+<h2 id="back-end">Back-End</h2>
+<p>The back-end consists of a Node Express server, a PostgreSQL database, and Heroku as the host and platform.</p>
+<h3 id="server-code">Server Code</h3>
+<p>The Node Express server handles routing and serving of the build. First, API routes are caught:</p>
+<pre><code class="language-javascript"><div><span class="hljs-comment">/* Set non-angular routes (server / api calls) */</span>
+app.get(<span class="hljs-string">'/getroutes'</span>, <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">req, res</span>) </span>{
+  queryPrimaryDatabase(<span class="hljs-string">`select * from recommended_routes;`</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, dataresponse</span>) </span>{
+    <span class="hljs-keyword">if</span> (dataresponse &amp;&amp; dataresponse.rows) {
+      res.status(<span class="hljs-number">200</span>).json(dataresponse.rows);
+    } <span class="hljs-keyword">else</span> {
+      res.status(<span class="hljs-number">400</span>).end();
+    }
+  })
+});
+...
+</div></code></pre>
+<p>Finally, all other routes are forwarded to Angular:</p>
+<pre><code class="language-javascript"><div>...
+<span class="hljs-comment">/* Send all other routes to Angular app */</span>
+app.get(<span class="hljs-string">'*'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">req, res</span>) </span>{
+  res.sendFile(path.join(__dirname, <span class="hljs-string">'../dist/huntley-meadows-park-map/index.html'</span>));
+});
+</div></code></pre>
+<p>In order to support continuous development, I used both <code>ng build --watch</code> and <code>heroku local</code>; this combination allowed the Node Express server build started by heroku to be automatically updated by Angular as I make changes.</p>
+<p>As for database connections, the one and only function needed was:</p>
+<pre><code class="language-javascript"><div><span class="hljs-comment">/**
+ * Asynchronous function which queries the database and returns the response
+ * @param {string} queryString - SQL Query String
+ * @param {function} callBackFunction - requires parameters (err, res), fires when query finishes
+ */</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">queryPrimaryDatabase</span>(<span class="hljs-params">queryString, callBackFunction = (err, res</span>) =&gt; </span>{}) {
+  <span class="hljs-keyword">const</span> pgPsqlClient = <span class="hljs-keyword">new</span> Client({
+    <span class="hljs-attr">connectionString</span>: process.env.DATABASE_URL,
+    <span class="hljs-attr">ssl</span>: <span class="hljs-literal">true</span>,
+  });
+  <span class="hljs-keyword">await</span> pgPsqlClient.connect();
+  <span class="hljs-keyword">return</span> pgPsqlClient.query(queryString, <span class="hljs-keyword">async</span> (err, res) =&gt; {
+    callBackFunction(err, res);
+    pgPsqlClient.end();
+  });
+}
+</div></code></pre>
+<h3 id="database">Database</h3>
+<p>Here are the real SQL commands used to architect the database:</p>
+<pre><code class="language-sql"><div><span class="hljs-keyword">SET</span> timezone = <span class="hljs-string">'America/New_York'</span>;
+
+<span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> recommended_routes (
+  route_name <span class="hljs-built_in">text</span>,
+  geojson <span class="hljs-built_in">text</span>
+);
+
+<span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> poi_get_started (
+  poi_name <span class="hljs-built_in">text</span> primary <span class="hljs-keyword">key</span>,
+  latitude <span class="hljs-built_in">decimal</span>(<span class="hljs-number">9</span>, <span class="hljs-number">6</span>),
+  longitude <span class="hljs-built_in">decimal</span>(<span class="hljs-number">9</span>, <span class="hljs-number">6</span>)
+);
+
+<span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> poi_facilities (
+  poi_name <span class="hljs-built_in">text</span> primary <span class="hljs-keyword">key</span>,
+  latitude <span class="hljs-built_in">decimal</span>(<span class="hljs-number">9</span>, <span class="hljs-number">6</span>),
+  longitude <span class="hljs-built_in">decimal</span>(<span class="hljs-number">9</span>, <span class="hljs-number">6</span>)
+);
+
+<span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> poi_local_favorites (
+  poi_name <span class="hljs-built_in">text</span> primary <span class="hljs-keyword">key</span>,
+  latitude <span class="hljs-built_in">decimal</span>(<span class="hljs-number">9</span>, <span class="hljs-number">6</span>),
+  longitude <span class="hljs-built_in">decimal</span>(<span class="hljs-number">9</span>, <span class="hljs-number">6</span>),
+  created_time_stamp timestamptz
+);
+
+<span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> poi_local_favorites <span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">COLUMN</span> created_time_stamp <span class="hljs-keyword">SET</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">now</span>();
+
+</div></code></pre>
+<p>An ER Diagram was not developed because no relationships were necessary between the tables.</p>
+<p>Here is an example of SQL being constructed in the server and used to update the database:</p>
+<pre><code class="language-javascript"><div>queryPrimaryDatabase(<span class="hljs-string">`
+    insert into poi_local_favorites (
+      poi_name, latitude, longitude
+    ) values (
+      '<span class="hljs-subst">${inputTitle}</span>', <span class="hljs-subst">${inputLatitude}</span>, <span class="hljs-subst">${inputLongitude}</span>
+    );
+  `</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, response</span>) </span>{
+  <span class="hljs-keyword">if</span> (response) {
+    res.status(<span class="hljs-number">200</span>).json(response);
+  } <span class="hljs-keyword">else</span> {
+    res.status(<span class="hljs-number">400</span>).end();
+  }
+})
+</div></code></pre>
+<h1 id="conclusion">Conclusion</h1>
+<p>The Huntley Meadows Park Map application managed to fulfill all the purposes outlined by the User Stories. It allows users to easily figure out how to get to the park, how to navigate it, and what to see while there. It also provides locals the ability to submit their favorite locations for others to see.</p>
+<p>The app manages to convey a large amount of information without overwhelming them. It will be an asset to any prospective Park visitor.</p>
+<style>
+  img[src*='#3rd'] {
+    width: 29%;
+    margin-left: 1.5%;
+    margin-right: 1.5%;
+  }
+  img[src*='#4th'] {
+    width: 21%;
+    margin-left: 1.5%;
+    margin-right: 1.5%;
+  }
+</style>
+
+    </body>
+    </html>
