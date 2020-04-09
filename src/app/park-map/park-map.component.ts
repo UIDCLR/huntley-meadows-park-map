@@ -337,7 +337,15 @@ export class ParkMapComponent implements OnInit {
     /* Post info to server */
     this.http.post("/postlocalfavorite", body).subscribe((res: any) => {
       console.log("response", res);
+      this.modalService.dismissAll();
+      alert("Submission successful! Please refresh to see your new Local Favorite.");
+    }, (err) => {
+      if (err.status == 401) {
+        alert("Incorrect PIN. Please try again.");
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
     });
   }
-
 }
+
