@@ -19,6 +19,10 @@ html {
       font-size: 12px;
       margin-top: 6px;
     }
+    .modal-dialog {
+      margin: 15vh 5vh 5vh 5vh;
+      height: 80vh;
+    }  
 
     /* Leaflet overrides */
     .leaflet-popup-content {

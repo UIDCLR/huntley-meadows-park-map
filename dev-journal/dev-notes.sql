@@ -24,6 +24,10 @@ WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema';
 /* See routes in recommended_routes */
 select route_name from recommended_routes;
 
+/* Managing local favorites */
+select * from poi_local_favorites;
+delete from poi_local_favorites where poi_name like 'test%';
+
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 /** Architectural SQL commands used on live database: **/

@@ -3,6 +3,7 @@ import * as L from 'leaflet';
 import 'leaflet.zoomhome/dist/leaflet.zoomhome.min.js';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -24,7 +25,11 @@ export class ParkMapComponent implements OnInit {
   poi_facilities: any;
   poi_localFavorites: any;
 
-  constructor(private http: HttpClient, private formBuilder: FormBuilder) { }
+  constructor(
+    private http: HttpClient,
+    private formBuilder: FormBuilder,
+    private modalService: NgbModal,
+  ) { }
 
   ngOnInit() {
     this.map = this.initializeMap();
@@ -200,6 +205,7 @@ export class ParkMapComponent implements OnInit {
     /* Local Favorites data */
     this.http.get("/get_poi_local_favorites").subscribe((data: any) => {
       let geoJsonString = this.getPoiGeoJsonString(data, "Local Favorite");
+      console.log("Local Favorites", JSON.parse(geoJsonString))
       this.poi_localFavorites = L.geoJSON(JSON.parse(geoJsonString), {
         pointToLayer: function (feature, latlng) {
           return L.marker(latlng, { icon: icon_localFavorites });
@@ -250,6 +256,10 @@ export class ParkMapComponent implements OnInit {
     return geoJsonString;
   }
 
+  openScrollableContent(longContent) {
+    this.modalService.open(longContent, { scrollable: true });
+  }
+
   getTooltipDirection(name) {
     const nameTrim = name.trim()
     if (
@@ -296,6 +306,31 @@ export class ParkMapComponent implements OnInit {
         maxZoom: 18,
       }),
     }
+  }
+
+  submitForm() {
+    /* Get form fields */
+    const inputTitle = <HTMLInputElement>document.querySelector('input#inputTitle');
+    const inputLatitude = <HTMLInputElement>document.querySelector('input#inputLatitude');
+    const inputLongitude = <HTMLInputElement>document.querySelector('input#inputLongitude');
+    const inputPin = <HTMLInputElement>document.querySelector('input#inputPin');
+
+    console.log(inputTitle.value,
+      inputLatitude.value,
+      inputLongitude.value,
+      inputPin.value)
+
+    const body = {
+      "inputTitle": inputTitle.value,
+      "inputLatitude": inputLatitude.value,
+      "inputLongitude": inputLongitude.value,
+      "inputPin": inputPin.value,
+    };
+
+    /* Post info to server */
+    this.http.post("/postlocalfavorite", body).subscribe((res: any) => {
+      console.log("response", res);
+    });
   }
 
 }

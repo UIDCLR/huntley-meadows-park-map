@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
 const {
   Client
 } = require('pg');
@@ -7,11 +8,15 @@ const {
 module.exports = {
   start: function () {
     const app = express();
+    app.use(bodyParser.json()); // for parsing application/json
+    app.use(bodyParser.urlencoded({
+      extended: true
+    }));
     app.use(express.static('./dist/huntley-meadows-park-map'));
     setUrlRoutes(app);
     console.log(`Starting app on Port ${process.env.PORT || 8080}`);
     app.listen(process.env.PORT || 8080);
-    test();
+    // test();
   }
 }
 
@@ -23,7 +28,7 @@ function setUrlRoutes(app) {
       if (datares && datares.rows) {
         res.status(200).json(datares.rows);
       } else {
-        res.status(400);
+        res.status(400).end();
       }
     })
   });
@@ -32,7 +37,7 @@ function setUrlRoutes(app) {
       if (datares && datares.rows) {
         res.status(200).json(datares.rows);
       } else {
-        res.status(400);
+        res.status(400).end();
       }
     })
   });
@@ -41,7 +46,7 @@ function setUrlRoutes(app) {
       if (datares && datares.rows) {
         res.status(200).json(datares.rows);
       } else {
-        res.status(400);
+        res.status(400).end();
       }
     })
   });
@@ -50,14 +55,50 @@ function setUrlRoutes(app) {
       if (datares && datares.rows) {
         res.status(200).json(datares.rows);
       } else {
-        res.status(400);
+        res.status(400).end();
       }
     })
   });
-  app.get('/getlocalfavorites', async function (req, res) {
-    dataRaw = {test: "test", test2: [1, 2]};
-    data = JSON.stringify(dataRaw);
-    res.status(200).json(data);
+  // app.get('/getlocalfavorites', async function (req, res) {
+  //   dataRaw = {test: "test", test2: [1, 2]};
+  //   data = JSON.stringify(dataRaw);
+  //   res.status(200).json(data);
+  // });
+  app.post('/postlocalfavorite', async function (req, res) {
+
+    /* Get app data */
+    /* Strip all characters except numbers, letters, and period */
+    const inputTitle = req.body.inputTitle.replace(/[^\w\s.\-]/g, '');
+    const inputLatitude = req.body.inputLatitude.replace(/[^\w\s.\-]/g, '');
+    const inputLongitude = req.body.inputLongitude.replace(/[^\w\s.\-]/g, '');
+    const inputPin = req.body.inputPin.replace(/[^\w\s.\-]/g, '');
+
+    console.log("Post request received: ", inputTitle,
+    inputLatitude,
+    inputLongitude,
+    inputPin);
+
+    console.log("process.env.POSTPIN1", process.env.POSTPIN1);
+
+    if (inputPin == process.env.POSTPIN1) {
+
+      queryPrimaryDatabase(`
+      insert into poi_local_favorites (
+        poi_name, latitude, longitude
+      ) values (
+        '${inputTitle}', ${inputLatitude}, ${inputLongitude}
+      );
+        `, function (err, response) {
+        if (response) {
+          res.status(200).json(response);
+        } else {
+          res.status(400).end();
+        }
+      })
+    } else {
+      res.status(401).end();
+    }
+
   });
 
   /* Send all other routes to Angular app */
@@ -67,7 +108,7 @@ function setUrlRoutes(app) {
 
 }
 
-async function test () {
+async function test() {
   console.log("! Testing database connection");
   console.log("! db url", process.env.DATABASE_URL);
   queryPrimaryDatabase(`select * from test;`, async function (err, res) {
@@ -86,7 +127,6 @@ async function queryPrimaryDatabase(queryString, callBackFunction = (err, res) =
     connectionString: process.env.DATABASE_URL,
     ssl: true,
   });
-  console.log("[INFO] Attempting to connect to database...");
   await pgPsqlClient.connect();
   return pgPsqlClient.query(queryString, async (err, res) => {
     callBackFunction(err, res);

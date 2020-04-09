@@ -1,8 +1,9 @@
 <div class="park-map-wrapper">
 
   <div class="header-section">
-    <h3 class="title-main">Huntley Meadows </h3>
+    <h4 class="title-main">Huntley Meadows </h4>
     <h5 class="title-sub">Park Map</h5>
+    <div class="info-button" (click)="openScrollableContent(longContent)">&#9432;</div>
   </div>
 
   <div id="park-map"></div>
@@ -13,20 +14,24 @@
     <form [formGroup]="checkboxGroupForm">
       <div class="btn-group btn-group-toggle">
         <label class="btn-secondary button-get-started" ngbButtonLabel>
-          <input type="checkbox" (click)="togglePoi(poi_getStarted)" formControlName="left" ngbButton><span class="circle">&#9679;</span> Get Started
+          <input type="checkbox" (click)="togglePoi(poi_getStarted)" formControlName="left" ngbButton><span
+            class="circle">&#9679;</span> Get Started
         </label>
         <label class="btn-secondary button-facilities" ngbButtonLabel>
-          <input type="checkbox" (click)="togglePoi(poi_facilities)" formControlName="middle" ngbButton><span class="circle">&#9679;</span> Facilities
+          <input type="checkbox" (click)="togglePoi(poi_facilities)" formControlName="middle" ngbButton><span
+            class="circle">&#9679;</span> Facilities
         </label>
         <label class="btn-secondary button-local-favorites" ngbButtonLabel>
-          <input type="checkbox" (click)="togglePoi(poi_localFavorites)" formControlName="right" ngbButton><span class="circle">&#9679;</span> Local Favorites
+          <input type="checkbox" (click)="togglePoi(poi_localFavorites)" formControlName="right" ngbButton><span
+            class="circle">&#9679;</span> Local Favorites
         </label>
       </div>
     </form>
     <div class="control-title">Recommended Walking Routes</div>
     <br>
     <div ngbDropdown placement="top-left" class="d-inline-block">
-      <button [ngClass]="{'active': currentRouteName !== noRouteSelectedString }" class="btn btn-secondary" id="dropdownBasic2" ngbDropdownToggle><span class="line">&#9644;</span> {{currentRouteName}}</button>
+      <button [ngClass]="{'active': currentRouteName !== noRouteSelectedString }" class="btn btn-secondary"
+        id="dropdownBasic2" ngbDropdownToggle><span class="line">&#9644;</span> {{currentRouteName}}</button>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
         <button (click)="updateRoute(1)" ngbDropdownItem><strong>Definitive Double-Loop</strong></button>
         <button (click)="updateRoute(2)" ngbDropdownItem><strong>Boardwalk Bend</strong></button>
@@ -36,5 +41,47 @@
     </div>
 
   </div>
+
+  <!-- Modal -->
+  <ng-template #longContent let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">About</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p><strong>Huntley Meadows Park</strong> is a beautiful, local wildlife sanctuary. Over 200,000 visitors frequent its walking-paths per year. The Park is a biodiverse forest and wetland home to over 30 species of mammals, 50 species of reptiles, amphibians and dragonflies, 200 species of birds and 600 species of plants.</p>
+      <h5>Submit a Local Favorite</h5>
+      <p>Approved users can submit local favorite attractions. Please fill out the form below.</p>
+      <form>
+        <div class="form-group">
+          <label for="inputTitle">Title</label>
+          <input required type="text" class="form-control" id="inputTitle"
+            placeholder="Enter title">
+          <small class="form-text text-muted">Maximum characters: 32</small>
+        </div>
+        <div class="form-group">
+          <label for="inputLatitude">Latitude</label>
+          <input required type="number" class="form-control" id="inputLatitude" placeholder="e.g. 38.756702">
+        </div>
+        <div class="form-group">
+          <label for="inputLongitude">Longitude</label>
+          <input required type="number" class="form-control" id="inputLongitude" placeholder="e.g. -77.098324">
+        </div>
+        <div class="form-group">
+          <label for="inputPin">Access Pin</label>
+          <input required type="password" class="form-control" id="inputPin" placeholder="Enter pin">
+        </div>
+        <button (click)="submitForm()" type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>
+
 
 </div>

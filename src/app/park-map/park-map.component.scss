@@ -27,14 +27,14 @@
     color: lightgray;
     text-shadow:
       /* 1px in all 8 directions */
-      // 0px -1px 0 black, // ↑
-      1px -1px 0 black, // ↗
-      // 1px 0px 0 black, // →
-      1px 1px 0 black, // ↘
-      // 0px 1px 0 black, // ↓
-      -1px 1px 0 black, // ↙
-      // -1px 0px 0 black, // ←
-      -1px -1px 0 black, // ↖
+      // 0px -1px 0 rgb(80, 80, 80), // ↑
+      1px -1px 0 rgb(80, 80, 80), // ↗
+      // 1px 0px 0 rgb(80, 80, 80), // →
+      1px 1px 0 rgb(80, 80, 80), // ↘
+      // 0px 1px 0 rgb(80, 80, 80), // ↓
+      -1px 1px 0 rgb(80, 80, 80), // ↙
+      // -1px 0px 0 rgb(80, 80, 80), // ←
+      -1px -1px 0 rgb(80, 80, 80), // ↖
     ;
 
   }
@@ -98,6 +98,14 @@
 
     .title-sub {
       @include title-text($margin: 13px 13px 13px 0px);
+      color: rgb(210, 244, 210);
+    }
+
+    .info-button {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      font-size: 20px;
     }
 
   }
