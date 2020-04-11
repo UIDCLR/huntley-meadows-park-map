@@ -16,9 +16,9 @@ Huntley Meadows Park is a 1452-acre park located just south of Washington D.C. i
 
 # User-Centered Design
 
-![Standard View 1](dev-journal/final-report/images/standard-1.png#3rd)
-![Standard View 2](dev-journal/final-report/images/standard-2.png#3rd)
-![Standard View 3](dev-journal/final-report/images/standard-3.png#3rd)
+<img src="dev-journal/final-report/images/standard-1.png" style="width: 29%; margin: 1.5%">
+<img src="dev-journal/final-report/images/standard-2.png" style="width: 29%; margin: 1.5%">
+<img src="dev-journal/final-report/images/standard-3.png" style="width: 29%; margin: 1.5%">
 
 User Stories:
 
@@ -83,10 +83,10 @@ The user is limited to zoom levels 14-18 so that they do not get lost. Each zoom
 - **About Modal**
   - The About modal (information window) provides the user with additional information about the park, as well as providing space for the User Submission form.
 
-![Google Maps](dev-journal/final-report/images/google-maps.png#4th)
-![Recommended Routes](dev-journal/final-report/images/recommended-routes.png#4th)
-![About Modal](dev-journal/final-report/images/about.png#4th)
-![User Submission](dev-journal/final-report/images/user-submission.png#4th)
+<img src="dev-journal/final-report/images/google-maps.png" style="width: 21%; margin: 1.5%">
+<img src="dev-journal/final-report/images/recommended-routes.png" style="width: 21%; margin: 1.5%">
+<img src="dev-journal/final-report/images/about.png" style="width: 21%; margin: 1.5%">
+<img src="dev-journal/final-report/images/user-submission.png" style="width: 21%; margin: 1.5%">
 
 # Implementation
 
@@ -235,16 +235,3 @@ queryPrimaryDatabase(`
 The Huntley Meadows Park Map application managed to fulfill all the purposes outlined by the User Stories. It allows users to easily figure out how to get to the park, how to navigate it, and what to see while there. It also provides locals the ability to submit their favorite locations for others to see. 
 
 The app manages to convey a large amount of information without overwhelming them. It will be an asset to any prospective Park visitor.
-
-<style>
-  img[src*='#3rd'] {
-    width: 29%;
-    margin-left: 1.5%;
-    margin-right: 1.5%;
-  }
-  img[src*='#4th'] {
-    width: 21%;
-    margin-left: 1.5%;
-    margin-right: 1.5%;
-  }
-</style>
