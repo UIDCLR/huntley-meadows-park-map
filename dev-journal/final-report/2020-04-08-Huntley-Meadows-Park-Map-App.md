@@ -16,9 +16,9 @@ Huntley Meadows Park is a 1452-acre park located just south of Washington D.C. i
 
 # User-Centered Design
 
-<img src="dev-journal/final-report/images/standard-1.png" width="29%" style="margin: 1.5%">
-<img src="dev-journal/final-report/images/standard-2.png" width="29%" style="margin: 1.5%">
-<img src="dev-journal/final-report/images/standard-3.png" width="29%" style="margin: 1.5%">
+| ![Standard View 1](dev-journal/final-report/images/standard-1.png#3rd) | ![Standard View 2](dev-journal/final-report/images/standard-2.png#3rd) | ![Standard View 3](dev-journal/final-report/images/standard-3.png#3rd) |
+|---|---|---|
+| *Initial View* | *Example 2* | *Example 3* |
 
 User Stories:
 
@@ -83,10 +83,9 @@ The user is limited to zoom levels 14-18 so that they do not get lost. Each zoom
 - **About Modal**
   - The About modal (information window) provides the user with additional information about the park, as well as providing space for the User Submission form.
 
-<img src="dev-journal/final-report/images/google-maps.png" width="21%" style="margin: 1.5%">
-<img src="dev-journal/final-report/images/recommended-routes.png" width="21%" style="margin: 1.5%">
-<img src="dev-journal/final-report/images/about.png" width="21%" style="margin: 1.5%">
-<img src="dev-journal/final-report/images/user-submission.png" width="21%" style="margin: 1.5%">
+| ![Google Maps](dev-journal/final-report/images/google-maps.png#4th) | ![Recommended Routes](dev-journal/final-report/images/recommended-routes.png#4th) | ![About Modal](dev-journal/final-report/images/about.png#4th) | ![User Submission](dev-journal/final-report/images/user-submission.png#4th) |
+|---|---|---|---|
+| *Google Maps* | *Recommended Routes* | *About Modal* | *User Submission* |
 
 # Implementation
 
