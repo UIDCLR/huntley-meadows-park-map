@@ -1,11 +1,10 @@
-
-# Building an Interactive Park Map
-
-**Project 2 Report**
+# Huntley Meadows Park Map
+ 
+## Building an Interactive Park Map
 
 2020-04-08
 
-Cory Leigh Rahman, University of Wisconsin-Madison, Master's in GIS & Web Map Programming, GEOG 777: Capstone in GIS Development, Project #2 Report
+Cory Leigh Rahman, University of Wisconsin-Madison, Master's in GIS & Web Map Programming, GEOG 777: Capstone in GIS Development, **Project #2 Report**
 
 # Introduction
 
@@ -17,9 +16,9 @@ Huntley Meadows Park is a 1452-acre park located just south of Washington D.C. i
 
 # User-Centered Design
 
-<img src="dev-journal/final-report/images/standard-1.png" style="width: 29%; margin: 1.5%">
-<img src="dev-journal/final-report/images/standard-2.png" style="width: 29%; margin: 1.5%">
-<img src="dev-journal/final-report/images/standard-3.png" style="width: 29%; margin: 1.5%">
+<img src="dev-journal/final-report/images/standard-1.png" width="29%" style="margin: 1.5%">
+<img src="dev-journal/final-report/images/standard-2.png" width="29%" style="margin: 1.5%">
+<img src="dev-journal/final-report/images/standard-3.png" width="29%" style="margin: 1.5%">
 
 User Stories:
 
@@ -84,10 +83,10 @@ The user is limited to zoom levels 14-18 so that they do not get lost. Each zoom
 - **About Modal**
   - The About modal (information window) provides the user with additional information about the park, as well as providing space for the User Submission form.
 
-<img src="dev-journal/final-report/images/google-maps.png" style="width: 21%; margin: 1.5%">
-<img src="dev-journal/final-report/images/recommended-routes.png" style="width: 21%; margin: 1.5%">
-<img src="dev-journal/final-report/images/about.png" style="width: 21%; margin: 1.5%">
-<img src="dev-journal/final-report/images/user-submission.png" style="width: 21%; margin: 1.5%">
+<img src="dev-journal/final-report/images/google-maps.png" width="21%" style="margin: 1.5%">
+<img src="dev-journal/final-report/images/recommended-routes.png" width="21%" style="margin: 1.5%">
+<img src="dev-journal/final-report/images/about.png" width="21%" style="margin: 1.5%">
+<img src="dev-journal/final-report/images/user-submission.png" width="21%" style="margin: 1.5%">
 
 # Implementation
 
